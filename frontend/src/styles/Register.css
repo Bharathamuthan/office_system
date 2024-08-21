@@ -1,0 +1,17 @@
+body {
+    overflow: hidden;
+  }
+  
+  .image{
+    object-fit: cover; 
+      
+  }
+.cascading-right {
+    margin-right: -50px !important;
+  }
+  
+  @media (max-width: 900px) {
+    .cascading-right {
+      margin-right: 0  !important;
+    }
+  }
