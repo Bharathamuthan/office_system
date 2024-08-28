@@ -9,10 +9,10 @@ import {
   MDBInput,
   MDBRow,
   MDBCol,
-  MDBCheckbox
+  //MDBCheckbox
 } from 'mdb-react-ui-kit';
 import '../styles/Register.css';
-import registerImage from '../assets/images/register.jpg';
+import registerImage from '../assets/images/favicon.png';
 
 function Register() {
   const navigate = useNavigate();
@@ -135,20 +135,20 @@ function Register() {
                   {errors.gender && <div className="text-danger">{errors.gender}</div>}
                 </div>
 
-                <div className='d-flex justify-content-center mb-4'>
+                {/* <div className='d-flex justify-content-center mb-4'>
                   <MDBCheckbox
                     name='flexCheck'
                     value=''
                     id='flexCheckDefault'
                     label='Subscribe to our newsletter'
                   />
-                </div>
+                </div> */}
 
                 <MDBBtn className='w-100 mb-4' size='md' type='submit'>Sign up</MDBBtn>
 
                 <p>
                   Already have an account?{' '}
-                  <MDBBtn color='link' size='sm' onClick={redirectToLogin}>Sign in</MDBBtn>
+                  <MDBBtn color='link' size='sm' onClick={redirectToLogin}>Login</MDBBtn>
                 </p>
               </form>
 

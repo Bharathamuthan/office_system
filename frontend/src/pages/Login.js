@@ -8,7 +8,7 @@ import {
   MDBInput,
   MDBRow,
   MDBCol,
-  MDBCheckbox
+  //MDBCheckbox
 } from 'mdb-react-ui-kit';
 import LoginImage from '../assets/images/thanku.jpg';
 import { useNavigate } from 'react-router-dom';
@@ -60,7 +60,7 @@ function Login() {
         <MDBCol col='6'>
           <MDBCard className='my-5 cascading-right' style={{background: 'hsla(0, 0%, 100%, 0.55)', backdropFilter: 'blur(30px)'}}>
             <MDBCardBody className='p-5 shadow-5 text-center'>
-              <h2 className="fw-bold mb-5">Sign in now</h2>
+              <h2 className="fw-bold mb-5">Login now</h2>
 
               <form onSubmit={handleSubmit}>
                 <MDBInput
@@ -84,16 +84,16 @@ function Login() {
                   feedback={errors.password}
                 />
 
-                <div className='d-flex justify-content-center mb-4'>
+                {/* <div className='d-flex justify-content-center mb-4'>
                   <MDBCheckbox
                     name='flexCheck'
                     value=''
                     id='flexCheckDefault'
                     label='Subscribe to our newsletter'
                   />
-                </div>
+                </div> */}
 
-                <MDBBtn className='w-100 mb-4' size='md' onClick={handleSubmit} type='submit'>Sign in</MDBBtn>
+                <MDBBtn className='w-100 mb-4' size='md' onClick={handleSubmit} type='submit'>Submit</MDBBtn>
 
                 <p>
                   Create New Account?{' '}
