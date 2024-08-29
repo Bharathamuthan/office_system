@@ -1,4 +1,3 @@
-// components/ChatList.js
 import React from 'react';
 
 const ChatList = ({ chats, onSelectChat }) => {
