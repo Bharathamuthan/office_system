@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { MDBCard, MDBCardBody, MDBCardTitle, MDBListGroup, MDBListGroupItem, MDBInputGroup, MDBInput, MDBBtn } from 'mdb-react-ui-kit';
 
 const GroupWindow = ({ group, messages, onSendMessage }) => {
   const [newMessage, setNewMessage] = useState('');
@@ -7,38 +6,48 @@ const GroupWindow = ({ group, messages, onSendMessage }) => {
   const handleSend = () => {
     if (newMessage.trim()) {
       onSendMessage(newMessage);
-      setNewMessage(''); 
+      setNewMessage('');
+    }
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      handleSend();
     }
   };
 
   return (
-    <MDBCard style={styles.groupWindow}>
-      <MDBCardBody style={styles.cardBody}>
-        <MDBCardTitle style={styles.groupTitle}>{group.name}</MDBCardTitle>
-      </MDBCardBody>
-
-      <MDBListGroup flush style={styles.messageList}>
+    <div className='group-window' style={styles.groupWindow}>
+      <div className='group-header' style={styles.groupHeader}>
+        <h4 style={styles.groupTitle}>{group.name}</h4>
+      </div>
+      <div className='message-list' style={styles.messageList}>
         {messages.map((message, index) => (
-          <MDBListGroupItem key={index} style={message.isSent ? styles.sentMessage : styles.receivedMessage}>
+          <div
+            key={index}
+            style={{
+              ...styles.message,
+              ...(message.isSent ? styles.sentMessage : styles.receivedMessage),
+            }}
+          >
             {message.text}
-          </MDBListGroupItem>
+          </div>
         ))}
-      </MDBListGroup>
-
-      <MDBInputGroup className="p-3" style={styles.inputGroup}>
-        <MDBInput 
-          type="text" 
-          placeholder="Type a message..." 
+      </div>
+      <div className='input-area' style={styles.inputArea}>
+        <input
+          type='text'
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
-          onKeyPress={(e) => e.key === 'Enter' && handleSend()} 
+          onKeyPress={handleKeyPress}
+          placeholder='Type a message...'
           style={styles.inputField}
         />
-        <MDBBtn color="primary" onClick={handleSend} style={styles.sendButton}>
+        <button onClick={handleSend} style={styles.sendButton}>
           Send
-        </MDBBtn>
-      </MDBInputGroup>
-    </MDBCard>
+        </button>
+      </div>
+    </div>
   );
 };
 
@@ -47,64 +56,67 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     height: '100%',
-    borderRadius: '15px',
-    boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
+    borderRadius: '10px',
+    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+    overflow: 'hidden',
   },
-  cardBody: {
+  groupHeader: {
+    padding: '15px',
     backgroundColor: '#007bff',
     color: '#fff',
-    borderTopLeftRadius: '15px',
-    borderTopRightRadius: '15px',
-    padding: '20px',
   },
   groupTitle: {
-    fontSize: '24px',
-    fontWeight: 'bold',
+    margin: 0,
+    fontSize: '22px',
+    fontWeight: '600',
   },
   messageList: {
     flex: 1,
-    overflowY: 'auto',
-    padding: '10px 20px',
+    padding: '10px',
     backgroundColor: '#f4f4f4',
+    overflowY: 'auto',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '10px', // Add some space between messages
+  },
+  message: {
+    maxWidth: '70%',
+    padding: '10px 15px',
+    borderRadius: '20px',
+    wordBreak: 'break-word',
+    alignSelf: 'flex-start', // Default alignment
   },
   sentMessage: {
-    marginBottom: '10px',
-    padding: '10px 15px',
     backgroundColor: '#007bff',
     color: '#fff',
-    borderRadius: '20px',
     alignSelf: 'flex-end',
-    maxWidth: '75%',
-    wordBreak: 'break-word',
   },
   receivedMessage: {
-    marginBottom: '10px',
-    padding: '10px 15px',
     backgroundColor: '#e9ecef',
     color: '#000',
-    borderRadius: '20px',
     alignSelf: 'flex-start',
-    maxWidth: '75%',
-    wordBreak: 'break-word',
   },
-  inputGroup: {
-    backgroundColor: '#fff',
-    borderTop: '1px solid #ccc',
-    padding: '10px 20px',
+  inputArea: {
+    padding: '10px',
+    borderTop: '1px solid #ddd',
     display: 'flex',
     alignItems: 'center',
+    backgroundColor: '#fff',
   },
   inputField: {
     flex: 1,
     padding: '10px',
     borderRadius: '20px',
-    border: '1px solid #ccc',
-    outline: 'none',
+    border: '1px solid #ddd',
+    marginRight: '10px',
   },
   sendButton: {
-    marginLeft: '15px',
-    padding: '10px 20px',
+    padding: '10px 15px',
     borderRadius: '20px',
+    border: 'none',
+    backgroundColor: '#007bff',
+    color: '#fff',
+    cursor: 'pointer',
   },
 };
 

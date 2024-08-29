@@ -6,7 +6,7 @@ const ChatWindow = ({ chat, messages, onSendMessage }) => {
   const handleSendMessage = () => {
     if (newMessage.trim()) {
       onSendMessage(newMessage);
-      setNewMessage(''); 
+      setNewMessage('');
     }
   };
 
@@ -18,8 +18,8 @@ const ChatWindow = ({ chat, messages, onSendMessage }) => {
 
   return (
     <div className='chat-window' style={styles.chatWindow}>
-      <div className='chat-header d-flex align-items-center justify-content-between' style={styles.chatHeader}>
-        <h4 style={styles.chatTitle}>{chat.name} <i className="fa fa-video"></i></h4>
+      <div className='chat-header' style={styles.chatHeader}>
+        <h4 style={styles.chatTitle}>{chat.name}</h4>
       </div>
       <div className='chat-messages' style={styles.chatMessages}>
         {messages.map((message, index) => (
@@ -34,17 +34,16 @@ const ChatWindow = ({ chat, messages, onSendMessage }) => {
           </div>
         ))}
       </div>
-      <div className='chat-input d-flex align-items-center' style={styles.chatInput}>
+      <div className='chat-input' style={styles.chatInput}>
         <input
           type='text'
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
           onKeyPress={handleKeyPress}
           placeholder='Type your message...'
-          className='form-control'
           style={styles.inputField}
         />
-        <button onClick={handleSendMessage} className='btn btn-primary' style={styles.sendButton}>
+        <button onClick={handleSendMessage} style={styles.sendButton}>
           Send
         </button>
       </div>
@@ -68,9 +67,14 @@ const styles = {
     color: '#fff',
     borderTopLeftRadius: '8px',
     borderTopRightRadius: '8px',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   chatTitle: {
     margin: 0,
+    fontSize: '22px',
+    fontWeight: '600',
   },
   chatMessages: {
     flex: 1,
@@ -98,17 +102,25 @@ const styles = {
   },
   chatInput: {
     padding: '10px',
-    backgroundColor: '#fff',
     borderTop: '1px solid #ccc',
+    display: 'flex',
+    alignItems: 'center',
+    backgroundColor: '#fff',
   },
   inputField: {
+    flex: 1,
+    padding: '10px',
+    borderRadius: '20px',
+    border: '1px solid #ccc',
     marginRight: '10px',
-    outline: 'none',
   },
   sendButton: {
     padding: '10px 15px',
     borderRadius: '20px',
     border: 'none',
+    backgroundColor: '#007bff',
+    color: '#fff',
+    cursor: 'pointer',
   },
 };
 
