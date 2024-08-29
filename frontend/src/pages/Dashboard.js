@@ -27,7 +27,6 @@ const Dashboard = () => {
     setSelectedChat(chat);
     setSelectedGroup(null);
 
-    // Example of loading messages for the selected chat
     setMessages([
       { text: 'Hello, how are you?', isSent: false },
       { text: 'I am fine, thanks!', isSent: true },
@@ -39,7 +38,6 @@ const Dashboard = () => {
     setSelectedGroup(group);
     setSelectedChat(null);
 
-    // Example of loading messages for the selected group
     setMessages([
       { text: 'Welcome to the group!', isSent: false },
       { text: 'Thank you!', isSent: true },

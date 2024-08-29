@@ -1,60 +1,78 @@
 import React, { useState } from 'react';
-import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput, MDBTextArea } from 'mdb-react-ui-kit';
+import '../styles/Dashboard.css'; 
 
 const LeaveRequest = () => {
-  const [leaveType, setLeaveType] = useState('');
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
-  const [reason, setReason] = useState('');
+    const [formData, setFormData] = useState({
+        startDate: '',
+        endDate: '',
+        reason: '',
+    });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle the leave request submission logic here
-    console.log('Leave Request Submitted', { leaveType, startDate, endDate, reason });
-  };
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value,
+        });
+    };
 
-  return (
-    <MDBContainer fluid className='mt-5'>
-      <MDBRow>
-        <MDBCol md='6' className='offset-md-3'>
-          <h3 className='text-center mb-4'>Leave Request</h3>
-          <form onSubmit={handleSubmit}>
-            <MDBInput
-              label='Leave Type'
-              type='text'
-              value={leaveType}
-              onChange={(e) => setLeaveType(e.target.value)}
-              className='mb-4'
-            />
-            <MDBInput
-              label='Start Date'
-              type='date'
-              value={startDate}
-              onChange={(e) => setStartDate(e.target.value)}
-              className='mb-4'
-            />
-            <MDBInput
-              label='End Date'
-              type='date'
-              value={endDate}
-              onChange={(e) => setEndDate(e.target.value)}
-              className='mb-4'
-            />
-            <MDBTextArea
-              label='Reason'
-              value={reason}
-              onChange={(e) => setReason(e.target.value)}
-              rows='4'
-              className='mb-4'
-            />
-            <MDBBtn type='submit' color='primary' block>
-              Submit Request
-            </MDBBtn>
-          </form>
-        </MDBCol>
-      </MDBRow>
-    </MDBContainer>
-  );
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await fetch('http://your-backend-url/leave-request', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            if (response.ok) {
+                alert('Leave request submitted successfully.');
+            } else {
+                alert('Failed to submit leave request.');
+            }
+        } catch (error) {
+            alert('An error occurred: ' + error.message);
+        }
+    };
+
+    return (
+        <div className="container">
+            <form onSubmit={handleSubmit}>
+                <h2>Leave Request</h2>
+                <div>
+                    <label>Start Date:</label>
+                    <input
+                        type="date"
+                        name="startDate"
+                        value={formData.startDate}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div>
+                    <label>End Date:</label>
+                    <input
+                        type="date"
+                        name="endDate"
+                        value={formData.endDate}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div>
+                    <label>Reason:</label>
+                    <textarea
+                        name="reason"
+                        value={formData.reason}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    );
 };
 
 export default LeaveRequest;
