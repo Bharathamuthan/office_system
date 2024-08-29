@@ -3,7 +3,8 @@ import ChatList from '../components/ChatList';
 import ChatWindow from '../components/ChatWindow';
 import GroupWindow from '../components/GroupWindow';
 import MessageInput from '../components/MessageInput';
-import { MDBContainer, MDBRow, MDBCol } from 'mdb-react-ui-kit';
+import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdb-react-ui-kit';
+import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
   const [chats] = useState([
@@ -18,6 +19,8 @@ const Dashboard = () => {
   const [messages, setMessages] = useState([]);
   const [selectedChat, setSelectedChat] = useState(null);
   const [selectedGroup, setSelectedGroup] = useState(null);
+
+  const navigate = useNavigate();
 
   const handleSelectChat = (chatId) => {
     const chat = chats.find(chat => chat.id === chatId);
@@ -55,9 +58,13 @@ const Dashboard = () => {
           <div className='sidebar'>
             <h5>Chats</h5>
             <ChatList chats={chats} onSelectChat={handleSelectChat} />
-            <hr /> {/* Divider between Chats and Groups */}
+            <hr />
             <h5>Groups</h5>
             <ChatList chats={groups} onSelectChat={handleSelectGroup} />
+            <hr />
+            <MDBBtn color='primary' onClick={() => navigate('/leave-request')}>
+              Leave Request
+            </MDBBtn>
           </div>
         </MDBCol>
 
