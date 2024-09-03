@@ -25,6 +25,7 @@ interface FormData {
   email: string;
   password: string;
   gender: string;
+  role: string;
 }
 
 interface FormErrors {
@@ -33,34 +34,32 @@ interface FormErrors {
   email?: string;
   password?: string;
   gender?: string;
+  role?: string;
 }
 
 const Register: React.FC = () => {
   const navigate = useNavigate();
 
-  // State management
   const [formData, setFormData] = useState<FormData>({
     firstName: '',
     lastName: '',
     email: '',
     password: '',
     gender: '',
+    role: '',
   });
   const [errors, setErrors] = useState<FormErrors>({});
 
-  // Handle input change
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement | { name?: string; value: unknown }> | SelectChangeEvent<string>
-  ) => {
-    const { id, value } = e.target as HTMLInputElement;
-    if (id) {
-      setFormData({ ...formData, [id]: value });
-    } else {
-      setFormData({ ...formData, gender: (e as SelectChangeEvent<string>).target.value });
-    }
+  const handleTextFieldChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target;
+    setFormData({ ...formData, [id]: value });
   };
 
-  // Validate form fields
+  const handleSelectChange = (e: SelectChangeEvent) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
     if (!formData.firstName) newErrors.firstName = 'First name is required';
@@ -68,17 +67,15 @@ const Register: React.FC = () => {
     if (!formData.email) newErrors.email = 'Email is required';
     if (!formData.password) newErrors.password = 'Password is required';
     if (!formData.gender) newErrors.gender = 'Gender is required';
+    if (!formData.role) newErrors.role = 'Role is required';
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  // Handle form submission
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
-      // Handle successful form submission here
       console.log('Form data:', formData);
-      // Redirect or perform other actions
       navigate('/');
     }
   };
@@ -92,14 +89,15 @@ const Register: React.FC = () => {
       <Grid container spacing={2} alignItems="center">
         <Grid item md={6}>
           <Card
+            className="register-card"
             sx={{
               my: 5,
               background: 'hsla(0, 0%, 100%, 0.55)',
               backdropFilter: 'blur(30px)',
             }}
           >
-            <CardContent sx={{ p: 5, textAlign: 'center' }}>
-              <Typography variant="h4" fontWeight="bold" mb={5}>
+            <CardContent sx={{ p: 4, textAlign: 'center' }}>
+              <Typography variant="h4" fontWeight="bold" mb={1}>
                 Sign up now
               </Typography>
 
@@ -112,7 +110,7 @@ const Register: React.FC = () => {
                       label="First name"
                       id="firstName"
                       value={formData.firstName}
-                      onChange={handleChange}
+                      onChange={handleTextFieldChange}
                       error={!!errors.firstName}
                       helperText={errors.firstName}
                       variant="outlined"
@@ -126,7 +124,7 @@ const Register: React.FC = () => {
                       label="Last name"
                       id="lastName"
                       value={formData.lastName}
-                      onChange={handleChange}
+                      onChange={handleTextFieldChange}
                       error={!!errors.lastName}
                       helperText={errors.lastName}
                       variant="outlined"
@@ -134,49 +132,83 @@ const Register: React.FC = () => {
                   </Grid>
                 </Grid>
 
-                <TextField
-                  fullWidth
-                  margin="normal"
-                  label="Email"
-                  id="email"
-                  type="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  error={!!errors.email}
-                  helperText={errors.email}
-                  variant="outlined"
-                />
-                <TextField
-                  fullWidth
-                  margin="normal"
-                  label="Password"
-                  id="password"
-                  type="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  error={!!errors.password}
-                  helperText={errors.password}
-                  variant="outlined"
-                />
+                <Grid container spacing={2}>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      fullWidth
+                      margin="normal"
+                      label="Email"
+                      id="email"
+                      type="email"
+                      value={formData.email}
+                      onChange={handleTextFieldChange}
+                      error={!!errors.email}
+                      helperText={errors.email}
+                      variant="outlined"
+                    />
+                  </Grid>
 
-                <FormControl fullWidth margin="normal" error={!!errors.gender}>
-                  <InputLabel id="gender-label">Gender</InputLabel>
-                  <Select
-                    labelId="gender-label"
-                    id="gender"
-                    value={formData.gender}
-                    label="Gender"
-                    onChange={handleChange as (event: SelectChangeEvent<string>, child: React.ReactNode) => void}
-                  >
-                    <MenuItem value="">
-                      <em>Select gender</em>
-                    </MenuItem>
-                    <MenuItem value="male">Male</MenuItem>
-                    <MenuItem value="female">Female</MenuItem>
-                    <MenuItem value="other">Other</MenuItem>
-                  </Select>
-                  <FormHelperText>{errors.gender}</FormHelperText>
-                </FormControl>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      fullWidth
+                      margin="normal"
+                      label="Password"
+                      id="password"
+                      type="password"
+                      value={formData.password}
+                      onChange={handleTextFieldChange}
+                      error={!!errors.password}
+                      helperText={errors.password}
+                      variant="outlined"
+                    />
+                  </Grid>
+                </Grid>
+
+                <Grid container spacing={2}>
+                  <Grid item xs={12} sm={6}>
+                    <FormControl fullWidth margin="normal" error={!!errors.gender}>
+                      <InputLabel id="gender-label">Gender</InputLabel>
+                      <Select
+                        labelId="gender-label"
+                        id="gender"
+                        name="gender"
+                        value={formData.gender}
+                        label="Gender"
+                        onChange={handleSelectChange}
+                      >
+                        <MenuItem value="">
+                          <em>Select gender</em>
+                        </MenuItem>
+                        <MenuItem value="male">Male</MenuItem>
+                        <MenuItem value="female">Female</MenuItem>
+                        <MenuItem value="other">Other</MenuItem>
+                      </Select>
+                      <FormHelperText>{errors.gender}</FormHelperText>
+                    </FormControl>
+                  </Grid>
+
+                  <Grid item xs={12} sm={6}>
+                    <FormControl fullWidth margin="normal" error={!!errors.role}>
+                      <InputLabel id="role-label">Role</InputLabel>
+                      <Select
+                        labelId="role-label"
+                        id="role"
+                        name="role"
+                        value={formData.role}
+                        label="Role"
+                        onChange={handleSelectChange}
+                      >
+                        <MenuItem value="">
+                          <em>Select Role</em>
+                        </MenuItem>
+                        <MenuItem value="admin">Admin</MenuItem>
+                        <MenuItem value="employee">Employee</MenuItem>
+                        <MenuItem value="training">Training</MenuItem>
+                      </Select>
+                      <FormHelperText>{errors.role}</FormHelperText>
+                    </FormControl>
+                  </Grid>
+                </Grid>
 
                 <Button fullWidth variant="contained" color="primary" type="submit" sx={{ mt: 3, mb: 2 }}>
                   Sign up
@@ -194,7 +226,7 @@ const Register: React.FC = () => {
         </Grid>
 
         <Grid item md={6}>
-          <img src={registerImage} className="w-100 rounded-4 shadow-4 img-fluid" alt="Register visual" />
+          <img src={registerImage} className="register-image" alt="Register visual" />
         </Grid>
       </Grid>
     </Container>
