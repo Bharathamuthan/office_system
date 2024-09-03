@@ -1,0 +1,76 @@
+.group-window {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  .group-header {
+    padding: 15px;
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .group-title {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 600;
+  }
+  
+  .message-list {
+    flex: 1;
+    padding: 10px;
+    background-color: #f4f4f4;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Add some space between messages */
+  }
+  
+  .message {
+    max-width: 70%;
+    padding: 10px 15px;
+    border-radius: 20px;
+    word-break: break-word;
+    align-self: flex-start; /* Default alignment */
+  }
+  
+  .sent-message {
+    background-color: #007bff;
+    color: #fff;
+    align-self: flex-end;
+  }
+  
+  .received-message {
+    background-color: #e9ecef;
+    color: #000;
+    align-self: flex-start;
+  }
+  
+  .input-area {
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+  }
+  
+  .input-field {
+    flex: 1;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    margin-right: 10px;
+  }
+  
+  .send-button {
+    padding: 10px 15px;
+    border-radius: 20px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+  }
+  
