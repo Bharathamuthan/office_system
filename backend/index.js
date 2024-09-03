@@ -1,14 +1,14 @@
 const express = require('express');
 const mongoose = require('mongoose');
-require('dotenv').config(); 
+require('dotenv').config();   
 const registerRoutes = require('../backend/Routes/register')
 const leaveRoutes = require('../backend/Routes/leave');
 const taskRoutes = require('../backend/Routes/task');
 const authenticate = require('../backend/middleware/authendicate');
 
 const app = express();
-app.use(express.json()); // To parse JSON bodies 
-
+app.use(express.json()); // To parse JSON bodies
+ 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Connected to MongoDB'))
@@ -17,7 +17,7 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
 // Use Routes
 app.use('/register',authenticate, registerRoutes)
 app.use('/leave', authenticate, leaveRoutes);
-app.use('/task', authenticate, taskRoutes);
+app.use('/task', authenticate, taskRoutes); 
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
