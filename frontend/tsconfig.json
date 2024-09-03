@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    /* Basic Options */
+    "target": "es2016",                         /* Set the JavaScript language version for emitted JavaScript. */
+    "module": "commonjs",                       /* Specify what module code is generated. */
+    "jsx": "react-jsx",                         /* Enable JSX syntax for React. */
+
+    /* Strict Type-Checking Options */
+    "strict": true,                             /* Enable all strict type-checking options. */
+    "esModuleInterop": true,                    /* Emit additional JS to ease support for importing CommonJS modules. */
+    "forceConsistentCasingInFileNames": true,   /* Ensure that casing is correct in imports. */
+
+    /* Additional Options */
+    "skipLibCheck": true,                       /* Skip type checking all .d.ts files. */
+    "allowJs": true,                            /* Allow JavaScript files to be a part of your project. */
+    "checkJs": true,                            /* Enable error reporting in type-checked JavaScript files. */
+
+    /* Source Map Options */
+    "sourceMap": true,                          /* Create source map files for emitted JavaScript files. */
+
+    /* Type Checking */
+    "strictNullChecks": true,                   /* When type checking, take into account 'null' and 'undefined'. */
+
+    /* Additional Module Resolution Options */
+    "moduleResolution": "node",                 /* Specify module resolution strategy: 'node'. */
+    "resolveJsonModule": true,                  /* Enable importing .json files. */
+
+    /* Specify library files */
+    "lib": ["dom", "dom.iterable", "esnext"]    /* Specify a set of bundled library declaration files that describe the target runtime environment. */
+  },
+  "include": ["src/**/*"],                      /* Include all files in the 'src' folder. */
+  "exclude": ["node_modules", "build"],         /* Exclude node_modules and build folders. */
+  "compileOnSave": true                         /* Ensure recompilation when saving changes. */
+}

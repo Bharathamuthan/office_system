@@ -1,5 +1,22 @@
 {
   "dependencies": {
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^6.0.1",
+    "@mui/material": "^6.0.1",
     "react-router-dom": "^6.26.1"
-  }
+  },
+  "devDependencies": {
+    "typescript": "^4.9.5"
+  },
+  "name": "office_system",
+  "description": "1. git branch\r 2. git checkout your branch\r 3. git status\r 4. git add\r 5. git commit -m ''\r 6. git pull origin (your branch)\r 7. git push origin (your branch)\r 8. git checkout main\r 9. git pull origin (your branch)\r 10. git push origin main",
+  "version": "1.0.0",
+  "main": "index.tsx",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
