@@ -11,19 +11,20 @@ interface Group {
 
 interface GroupListProps {
   groups: Group[];
+  selectedGroupId: number | null;
   onSelectGroup: (id: number) => void;
 }
 
 // GroupList component
-const GroupList: React.FC<GroupListProps> = ({ groups, onSelectGroup }) => {
+const GroupList: React.FC<GroupListProps> = ({ groups, selectedGroupId, onSelectGroup }) => {
   return (
     <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
       {groups.map((group) => (
         <React.Fragment key={group.id}>
           <ListItem
             onClick={() => onSelectGroup(group.id)}
-            sx={{ cursor: 'pointer' }}
-            component="div" // Render as a div to maintain button-like behavior
+            sx={{ cursor: 'pointer', bgcolor: selectedGroupId === group.id ? 'lightgray' : 'inherit' }}
+            component="div"
           >
             <ListItemText primary={group.name} />
           </ListItem>

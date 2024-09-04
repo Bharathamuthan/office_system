@@ -4,7 +4,7 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import ChatWindow from '../components/ChatWindow';
-import MessageInput from '../components/MessageInput';
+// Import MessageInput if needed but you won't use it in this case
 
 interface Chat {
   id: number;
@@ -48,7 +48,8 @@ const ChatPage: React.FC = () => {
                   messages={messages}
                   onSendMessage={handleSendMessage} // Pass the prop here
                 />
-                <MessageInput onSendMessage={handleSendMessage} />
+                {/* MessageInput is commented out */}
+                {/* <MessageInput onSendMessage={handleSendMessage} /> */}
               </>
             ) : (
               <Box

@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import GroupList from '../components/GroupList'; 
 import GroupWindow from '../components/GroupWindow';
-import MessageInput from '../components/MessageInput';
-import { Container, Grid, Button, Paper, Typography } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { Container, Grid, Paper, Typography } from '@mui/material';
+import '../styles/Group.css';
 
 interface Group {
   id: number;
@@ -26,8 +25,6 @@ const GroupPage: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [selectedGroup, setSelectedGroup] = useState<Group | null>(null);
 
-  const navigate = useNavigate();
-
   const handleSelectGroup = (groupId: number) => {
     const group = groups.find(group => group.id === groupId);
     setSelectedGroup(group || null);
@@ -43,10 +40,6 @@ const GroupPage: React.FC = () => {
     setMessages([...messages, { text, isSent: true }]);
   };
 
-  const handleBackClick = () => {
-    navigate('/dashboard'); 
-  };
-
   return (
     <Container className='mt-5'>
       <Grid container spacing={2}>
@@ -54,10 +47,12 @@ const GroupPage: React.FC = () => {
         <Grid item xs={12} md={3}>
           <Paper elevation={3} style={{ height: '100vh', overflowY: 'auto', padding: '16px' }}>
             <Typography variant="h6">Groups</Typography>
-            <GroupList groups={groups} onSelectGroup={handleSelectGroup} />
-            <Button variant="contained" color="primary" onClick={handleBackClick} style={{ marginTop: '16px' }}>
-              Back to Dashboard
-            </Button>
+            <GroupList
+              groups={groups}
+              selectedGroupId={selectedGroup?.id || null} 
+              onSelectGroup={handleSelectGroup}
+            />
+          
           </Paper>
         </Grid>
 
@@ -67,10 +62,13 @@ const GroupPage: React.FC = () => {
             {selectedGroup ? (
               <>
                 <GroupWindow group={selectedGroup} messages={messages} onSendMessage={handleSendMessage} />
-                <MessageInput onSendMessage={handleSendMessage} />
+                {/* MessageInput component removed */}
               </>
             ) : (
-              <div className='d-flex justify-content-center align-items-center h-100'>
+              <div
+                className='d-flex justify-content-center align-items-center'
+                style={{ height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '300px' }}
+              >
                 <Typography variant="h4" align="center">Please select a group</Typography>
               </div>
             )}

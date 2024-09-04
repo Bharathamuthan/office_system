@@ -4,10 +4,10 @@ require('dotenv').config();
 const registerRoutes = require('../backend/Routes/register')
 const leaveRoutes = require('../backend/Routes/leave');
 const taskRoutes = require('../backend/Routes/task');
-const authenticate = require('../backend/middleware/authendicate');
+const authenticate = require('../backend/middleware/authenticate');
 
 const app = express();
-app.use(express.json()); // To parse JSON bodies 
+app.use(express.json()); 
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })

@@ -1,7 +1,7 @@
 .group-window {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: 88%;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     overflow: hidden;
@@ -26,7 +26,7 @@
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 10px; /* Add some space between messages */
+    gap: 10px;
   }
   
   .message {
@@ -34,7 +34,7 @@
     padding: 10px 15px;
     border-radius: 20px;
     word-break: break-word;
-    align-self: flex-start; /* Default alignment */
+    align-self: flex-start;
   }
   
   .sent-message {
@@ -73,4 +73,13 @@
     color: #fff;
     cursor: pointer;
   }
+
+  .messageContainer {
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 300px; 
+  }
+  
   
