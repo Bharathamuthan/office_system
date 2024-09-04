@@ -17,7 +17,7 @@ import {
 } from '@mui/material';
 import { SelectChangeEvent } from '@mui/material/Select';
 import '../styles/Register.css';
-import registerImage from '../assets/images/favicon.png';
+import registerImage from '../assets/images/reg.png';
 
 interface FormData {
   firstName: string;
