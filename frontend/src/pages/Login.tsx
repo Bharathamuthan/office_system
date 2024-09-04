@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { Container, Grid, Card, CardContent, TextField, Button, Typography, Link } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import LoginImage from '../assets/images/loginimg.png';
+import LoginImage from '../assets/images/signin.png';
 import '../styles/Login.css';
 
 interface FormData {
