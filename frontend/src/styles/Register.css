@@ -1,18 +1,25 @@
 body {
-    overflow: hidden;
-    background-color:beige;
-  }
-  
-  .image{
-    object-fit: cover; 
-    margin-left: 100px;
-  }
+  overflow:auto;
+  height: 100%;
+  width: 100%;
+  background-color: beige;
+}
+
+.image {
+  width: 100%; /* Make the image take up the full width of its container */
+  height: auto; /* Maintain the aspect ratio */
+  display: block; /* Remove default inline styling */
+  margin: auto; /* Center the image */
+  border-radius: 8px; /* Optional: add a slight rounding for aesthetic */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: add a shadow for depth */
+}
+
 .cascading-right {
-    margin-right: -50px !important;
+  margin-right: -50px !important;
+}
+
+@media (max-width: 900px) {
+  .cascading-right {
+    margin-right: 0 !important;
   }
-  
-  @media (max-width: 900px) {
-    .cascading-right {
-      margin-right: 0  !important;
-    }
-  }
+}
