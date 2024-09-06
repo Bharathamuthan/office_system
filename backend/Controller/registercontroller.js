@@ -1,48 +1,47 @@
-const User = require('../Model/registermodel'); 
+const User = require('../Model/registermodel');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const config = require('config');  
-const {UserSchema,loginSchema} = require('../Validation/registervalidation')
+const config = require('config');
+const { UserSchema, loginSchema } = require('../Validation/registervalidation');
 
-// Create a new employee
+// Create a new user
 const createUser = async (req, res) => {
+    // Validate data before creating a user
+    const { error } = UserSchema.validate(req.body);
+    if (error) return res.status(400).json({ message: error.details[0].message });
 
-     // Validate data before creating a user
-     const { error } = UserSchema(req.body);
-     if (error) return res.status(400).json({ message: error.details[0].message });
+    const { FirstName, LastName, Gender, Email, Password, Role } = req.body;
 
-    const { FirstName, LastName, Gender, Email, Password } = req.body;
-
-    if (!FirstName || !LastName || !Gender || !Email || !Password) {
+    if (!FirstName || !LastName || !Gender || !Email || !Password || !Role) {
         return res.status(400).json({ message: 'All fields are required' });
     }
 
     try {
         let user = await User.findOne({ Email });
         if (user) {
-            return res.status(400).json({ message: 'Employee already exists' });
+            return res.status(400).json({ message: 'User already exists' });
         }
 
-       user = new User({
+        user = new User({
             FirstName,
             LastName,
             Gender,
             Email,
-            Password
+            Password,
+            Role
         });
 
         const salt = await bcrypt.genSalt(10);
-       user.Password = await bcrypt.hash(Password, salt);
+        user.Password = await bcrypt.hash(Password, salt);
 
-        await user.save(); 
+        await user.save();
         res.status(201).json({ success: true, data: user });
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error');
     }
 };
-
-// Get all employees
+// Get all users
 const getAllUsers = async (req, res) => {
     try {
         const users = await User.find();
@@ -58,17 +57,17 @@ const getAllUsers = async (req, res) => {
     }
 };
 
-// Get a single employee by ID
+// Get a single user by ID
 const getUserById = async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
         if (!user) {
             return res.status(404).json({
-                success: false,  
-                message: 'Employee not found'
+                success: false,
+                message: 'User not found'
             });
         }
-         res.status(200).json({
+        res.status(200).json({
             success: true,
             data: user
         });
@@ -80,14 +79,14 @@ const getUserById = async (req, res) => {
     }
 };
 
-// Update an employee by ID
+// Update a user by ID
 const updateUser = async (req, res) => {
     try {
         const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
         if (!user) {
             return res.status(404).json({
                 success: false,
-                message: 'Employee not found'
+                message: 'User not found'
             });
         }
         res.status(200).json({
@@ -102,19 +101,19 @@ const updateUser = async (req, res) => {
     }
 };
 
-// Delete an employee by ID
+// Delete a user by ID
 const deleteUser = async (req, res) => {
     try {
-        const user = await Employe.findByIdAndDelete(req.params.id);
+        const user = await User.findByIdAndDelete(req.params.id);
         if (!user) {
             return res.status(404).json({
                 success: false,
-                message: 'Employee not found'
+                message: 'User not found'
             });
         }
         res.status(200).json({
             success: true,
-            message: 'Employee deleted successfully'
+            message: 'User deleted successfully'
         });
     } catch (error) {
         res.status(500).json({
@@ -124,50 +123,51 @@ const deleteUser = async (req, res) => {
     }
 };
 
-// Login employee
+// // Login user
 const loginUser = async (req, res) => {
-
-     // Validate data before logging in a user
-     const { error } = loginSchema(req.body);
-     if (error) return res.status(400).json({ message: error.details[0].message });
+    // Validate user input
+    const { error } = loginSchema.validate(req.body);
+    if (error) return res.status(400).json({ message: error.details[0].message });
 
     const { Email, Password } = req.body;
 
-    if (!Email || !Password) {
-        return res.status(400).json({ message: 'All fields are required' });
-    }
-
     try {
+        // Find user by email
         const user = await User.findOne({ Email });
         if (!user) {
-            return res.status(400).json({ message: 'Invalid email' });
+            return res.status(400).json({ message: 'Invalid email or password' });
         }
 
+        // Compare provided password with the hashed password in the database
         const isMatch = await bcrypt.compare(Password, user.Password);
         if (!isMatch) {
-            return res.status(400).json({ message: 'Invalid password' });
+            return res.status(400).json({ message: 'Invalid email or password' });
         }
 
+        // Create JWT payload
         const payload = {
             user: {
-                id: user.id
+                id: user.id,
+                role: user.Role // Include role or any other user info if needed
             }
         };
 
-        jwt.sign(
+        // Sign the token
+        const token = jwt.sign(
             payload,
-            config.get('jwtSecret'),  
-            { expiresIn: '3h' },
-            (err, token) => {
-                if (err) throw err;
-                res.json({ token });
-            }
+            config.get('jwtSecret'),  // Ensure you have 'jwtSecret' in your config file
+            { expiresIn: '3h' }  // Token expiration time
         );
+
+        // Respond with the token
+        res.status(200).json({ token });
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error');
     }
 };
+
+
 
 module.exports = {
     createUser,
@@ -177,3 +177,4 @@ module.exports = {
     deleteUser,
     loginUser
 };
+

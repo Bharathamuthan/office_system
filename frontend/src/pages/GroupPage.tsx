@@ -40,6 +40,11 @@ const GroupPage: React.FC = () => {
     setMessages([...messages, { text, isSent: true }]);
   };
 
+  // Handle close button click in GroupWindow
+  const handleCloseGroupWindow = () => {
+    setSelectedGroup(null); 
+  };
+
   return (
     <Container className='mt-5'>
       <Grid container spacing={2}>
@@ -61,8 +66,12 @@ const GroupPage: React.FC = () => {
           <Paper elevation={3} style={{ height: '100vh', display: 'flex', flexDirection: 'column', padding: '16px' }}>
             {selectedGroup ? (
               <>
-                <GroupWindow group={selectedGroup} messages={messages} onSendMessage={handleSendMessage} />
-                {/* MessageInput component removed */}
+                <GroupWindow 
+                  group={selectedGroup} 
+                  messages={messages} 
+                  onSendMessage={handleSendMessage} 
+                  onClose={handleCloseGroupWindow} // Pass the onClose prop
+                />
               </>
             ) : (
               <div
