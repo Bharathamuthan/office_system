@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Grid, Button, Box, Divider, Typography } from '@mui/material';
 import { useNavigate, Outlet } from 'react-router-dom';
+import '../styles/Dashboard.css';
 
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();

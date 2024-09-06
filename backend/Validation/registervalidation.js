@@ -17,15 +17,18 @@ const UserSchema = Joi.object({
     .required(),
 
   Password: Joi.string()
+    .min(8)  // Minimum length for security
+    //.pattern(/(?=.*[A-Z])(?=.*\d)/)  // At least one uppercase letter and one number
     .required(),
 
   Gender: Joi.string()
     .valid('male', 'female', 'other')  
     .required(),
-
-  Phonenumber: Joi.string()
+    
+   Role: Joi.string()
+    .valid('Admin', 'employee', 'customer')
     .required()
-    .pattern(/^[0-9]{10}$/).required()
+   
 });
 
 // Login validation schema
@@ -35,6 +38,7 @@ const loginSchema = Joi.object({
     .required(),
 
   Password: Joi.string()
+    .min(8)  // Minimum length for security
     .required(),
 });
 
@@ -42,3 +46,4 @@ module.exports = {
   UserSchema,
   loginSchema
 };
+
