@@ -152,6 +152,12 @@ const loginUser = async (req, res) => {
             }
         };
 
+        const jwtSecret = process.env.JWT_SECRET;
+
+        if (!jwtSecret) {
+          return res.status(500).json({ error: 'JWT secret is not defined' });
+        }
+      
         // Sign the token
         const token = jwt.sign(
             payload,

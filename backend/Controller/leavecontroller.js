@@ -1,9 +1,9 @@
 const LeaveRequest = require('../Model/leavemodel');
-const { leaveRequestSchema, requestIdSchema } = require('../validation');
+//const { leaveRequestSchema, requestIdSchema } = require('../validation');
 
 const requestLeave = async (req, res) => {
   try {
-    // Validate request body
+    // Validate request body 
     const { error } = leaveRequestSchema.validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
