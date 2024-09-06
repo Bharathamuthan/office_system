@@ -33,9 +33,10 @@ const UserSchema = new mongoose.Schema({
         enum: ['male', 'female', 'other'],
     },
 
-    Phonenumber: {
+    Role: {
        type: String,  
        required: true,
+       enum: ['Admin','employee','customer']
      }
 });
 

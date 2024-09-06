@@ -8,6 +8,7 @@
   }
   
   .group-header {
+    display: flex;
     padding: 15px;
     background-color: #007bff;
     color: #fff;
@@ -80,6 +81,33 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 300px; 
+  }
+
+  .close-button{
+    margin-left: 420px;
+  }
+  
+  .file-sharing {
+    margin-bottom: 10px;
+  }
+  
+  .file-upload-icon {
+    background-color: transparent;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  .file-upload-input {
+    display: none;
+  }
+  
+  .input-field {
+    margin-left: 10px;
+  }
+  
+  .send-button {
+    margin-left: 10px;
   }
   
   
