@@ -1,25 +1,28 @@
 import React, { useState, KeyboardEvent } from 'react';
-import '../styles/Group.css'; 
+import { Box, Typography, TextField, Button } from '@mui/material';
+
+interface Chat {
+  id: number;
+  name: string;
+  lastMessage: string;
+  unreadCount: number;
+}
 
 interface Message {
   text: string;
   isSent: boolean;
 }
 
-interface Group {
-  name: string;
-}
-
-interface GroupWindowProps {
-  group: Group;
+interface ChatWindowProps {
+  chat: Chat;  // Make sure the 'chat' prop is defined here
   messages: Message[];
   onSendMessage: (message: string) => void;
 }
 
-const GroupWindow: React.FC<GroupWindowProps> = ({ group, messages, onSendMessage }) => {
+const ChatWindow: React.FC<ChatWindowProps> = ({ chat, messages, onSendMessage }) => {
   const [newMessage, setNewMessage] = useState<string>('');
 
-  const handleSend = () => {
+  const handleSendMessage = () => {
     if (newMessage.trim()) {
       onSendMessage(newMessage);
       setNewMessage('');
@@ -28,40 +31,36 @@ const GroupWindow: React.FC<GroupWindowProps> = ({ group, messages, onSendMessag
 
   const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      handleSend();
+      event.preventDefault();
+      handleSendMessage();
     }
   };
 
   return (
-    <div className='group-window'>
-      <div className='group-header'>
-        <h4 className='group-title'>{group.name}</h4>
-      </div>
-      <div className='message-list'>
+    <Box>
+      <Typography variant="h4">{chat.name}</Typography>
+      <Box>
         {messages.map((message, index) => (
-          <div
-            key={index}
-            className={`message ${message.isSent ? 'sent-message' : 'received-message'}`}
-          >
+          <div key={index} className={`message ${message.isSent ? 'sent' : 'received'}`}>
             {message.text}
           </div>
         ))}
-      </div>
-      <div className='input-area'>
-        <input
-          type='text'
+      </Box>
+      <Box>
+        <TextField
+          variant="outlined"
+          fullWidth
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
           onKeyPress={handleKeyPress}
-          placeholder='Type a message...'
-          className='input-field'
+          placeholder="Type your message..."
         />
-        <button onClick={handleSend} className='send-button'>
+        <Button onClick={handleSendMessage} variant="contained" color="primary">
           Send
-        </button>
-      </div>
-    </div>
+        </Button>
+      </Box>
+    </Box>
   );
 };
 
-export default GroupWindow;
+export default ChatWindow;

@@ -1,0 +1,10 @@
+/* ChatList Styles */
+.chatListContainer {
+    max-height: 300px; /* Set a max height */
+    overflow-y: auto;  /* Enable vertical scrolling */
+    padding: 8px;      /* Optional: Add some padding */
+    background-color: #fff; /* Background color */
+    border: 1px solid #ddd; /* Optional: Border for visual separation */
+    border-radius: 8px;     /* Optional: Rounded corners */
+  }
+  

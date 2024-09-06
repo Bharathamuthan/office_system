@@ -1,17 +1,13 @@
 body {
-  overflow:auto;
-  height: 100%;
-  width: 100%;
+  /* overflow: hidden; */
   background-color: beige;
 }
 
 .image {
-  width: 100%; /* Make the image take up the full width of its container */
-  height: auto; /* Maintain the aspect ratio */
-  display: block; /* Remove default inline styling */
-  margin: auto; /* Center the image */
-  border-radius: 8px; /* Optional: add a slight rounding for aesthetic */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: add a shadow for depth */
+  max-width: 100%; 
+  height: auto; 
+  display: block; 
+  margin: auto; 
 }
 
 .cascading-right {

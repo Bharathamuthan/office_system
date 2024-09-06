@@ -18,11 +18,11 @@ const Dashboard: React.FC = () => {
   };
 
   return (
-    <Container maxWidth={false} sx={{ mt: 5, height: '100vh' }}>
+    <Container maxWidth={false} sx={{ mt: 5, height: '50vh' }}>
       <Grid container>
         {/* Sidebar */}
-        <Grid item md={3} sx={{ backgroundColor: 'lightgray', height: '100vh', overflowY: 'auto' }}>
-          <Box className='sidebar' p={2}>
+        <Grid item md={3} sx={{ backgroundColor: 'lightgray', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+          <Box className='sidebar' p={2} sx={{ flex: 1 }}>
             <Typography variant="h5" fontWeight="bold">PCS</Typography>
             <Divider sx={{ my: 2 }} />
             <Button variant='contained' color='primary' fullWidth onClick={handleAdminClick}>

@@ -1,7 +1,6 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
-import '../styles/Dashboard.css'; 
+import '../styles/LeaveRequest.css';
 
-// Define the types for form data
 interface FormData {
   Date: string;
   Hourpermission: string;
@@ -77,7 +76,7 @@ const LeaveRequest: React.FC = () => {
         </div>
         <div>
           <label>Reason:</label>
-          <textarea
+          <input
             name="reason"
             value={formData.reason}
             onChange={handleChange}

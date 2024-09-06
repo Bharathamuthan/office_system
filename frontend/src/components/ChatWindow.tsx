@@ -1,13 +1,13 @@
 import React, { useState, KeyboardEvent } from 'react';
-import { Box, Typography, TextField, Button } from '@mui/material';
+import { Button, Box, Typography, TextField } from '@mui/material';
+
+interface Chat {
+  name: string;
+}
 
 interface Message {
   text: string;
   isSent: boolean;
-}
-
-interface Chat {
-  name: string;
 }
 
 interface ChatWindowProps {
@@ -28,87 +28,55 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ chat, messages, onSendMessage }
 
   const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
+      event.preventDefault();
       handleSendMessage();
     }
   };
 
   return (
-    <Box 
-      display="flex"
-      flexDirection="column"
-      height="100%"
-      bgcolor="#f4f4f4"
-      borderRadius="8px"
-      boxShadow="0 0 10px rgba(0, 0, 0, 0.1)"
-      overflow="hidden"
-    >
-      <Box 
-        p={2}
-        bgcolor="#007bff"
-        color="#fff"
-        display="flex"
-        justifyContent="space-between"
-        alignItems="center"
-        sx={{
-          borderTopLeftRadius: '8px',
-          borderTopRightRadius: '8px',
-        }}
-      >
-        <Typography variant="h6" component="h4" margin={0}>
-          {chat.name}
-        </Typography>
+    <Box className="chatWindow" sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+      {/* Chat Header */}
+      <Box className="chatHeader" sx={{ padding: 2, borderBottom: '1px solid #ddd' }}>
+        <Typography variant="h5" className="chatHtag"><b>{chat.name}</b></Typography>
       </Box>
-      <Box 
-        flex={1}
-        p={2}
-        bgcolor="#fff"
-        display="flex"
-        flexDirection="column"
-        sx={{
-          overflowY: 'auto',  // Use overflowY inside the sx prop
-        }}
-      >
+
+      {/* Chat Messages */}
+      <Box className="chatMessages" sx={{ flex: 1, overflowY: 'auto', padding: 2 }}>
         {messages.map((message, index) => (
           <Box
             key={index}
             sx={{
-              maxWidth: '70%',
-              p: 2,
-              mb: 1,
-              borderRadius: '20px',
-              wordBreak: 'break-word',
+              padding: 1,
+              marginY: 1,
+              borderRadius: 1,
+              bgcolor: message.isSent ? 'primary.main' : 'grey.300',
+              color: message.isSent ? 'white' : 'black',
               alignSelf: message.isSent ? 'flex-end' : 'flex-start',
-              bgcolor: message.isSent ? '#007bff' : '#e9ecef',
-              color: message.isSent ? '#fff' : '#000',
+              maxWidth: '60%',
             }}
           >
             {message.text}
           </Box>
         ))}
       </Box>
-      <Box 
-        p={1}
-        borderTop="1px solid #ccc"
-        display="flex"
-        alignItems="center"
-        bgcolor="#fff"
-      >
+
+      {/* Chat Input */}
+      <Box className="chatInputContainer" sx={{ display: 'flex', padding: 2, borderTop: '1px solid #ddd' }}>
         <TextField
-          variant="outlined"
-          multiline
-          rows={1}
           fullWidth
+          variant="outlined"
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
           onKeyPress={handleKeyPress}
           placeholder="Type your message..."
-          sx={{ mr: 1, borderRadius: '20px' }}
+          className="chatInput"
+          sx={{ marginRight: 2 }}
         />
-        <Button 
+        <Button
           variant="contained"
           color="primary"
           onClick={handleSendMessage}
-          sx={{ borderRadius: '20px' }}
+          className="sendButton"
         >
           Send
         </Button>
