@@ -2,6 +2,7 @@ const User = require('../Model/registermodel');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const config = require('config');
+require('dotenv').config();
 const { UserSchema, loginSchema } = require('../Validation/registervalidation');
 
 // Create a new user
