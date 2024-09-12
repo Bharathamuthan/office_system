@@ -36,7 +36,7 @@ const createUser = async (req, res) => {
         user.Password = await bcrypt.hash(Password, salt);
 
         await user.save();
-        res.status(201).json({ success: true, data: user });
+        res.status(201).json({ message: 'Registerd succesfully' });
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error');
