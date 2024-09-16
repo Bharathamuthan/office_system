@@ -1,42 +1,31 @@
 import React, { useState, KeyboardEvent } from 'react';
-<<<<<<< HEAD
-import { Box, Typography, TextField, Button } from '@mui/material';
-
-interface Chat {
-  id: number;
-  name: string;
-  lastMessage: string;
-  unreadCount: number;
-}
-=======
-import '../styles/Group.css'; 
+import '../styles/Group.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import Picker from '@emoji-mart/react';  // Update import to default
 import data from '@emoji-mart/data';     // Emoji data import
->>>>>>> 31a9229048652a77f72a658c7d19986638454a94
 
 interface Message {
   text: string;
   isSent: boolean;
 }
 
-interface ChatWindowProps {
-  chat: Chat;  // Make sure the 'chat' prop is defined here
+interface Group {
+  name: string;
+}
+
+interface GroupWindowProps {
+  group: Group;
   messages: Message[];
   onSendMessage: (message: string) => void;
   onClose: () => void; 
 }
 
-<<<<<<< HEAD
-const ChatWindow: React.FC<ChatWindowProps> = ({ chat, messages, onSendMessage }) => {
-=======
 const GroupWindow: React.FC<GroupWindowProps> = ({ group, messages, onSendMessage, onClose }) => {
->>>>>>> 31a9229048652a77f72a658c7d19986638454a94
   const [newMessage, setNewMessage] = useState<string>('');
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [showEmojiPicker, setShowEmojiPicker] = useState<boolean>(false);
 
-  const handleSendMessage = () => {
+  const handleSend = () => {
     if (newMessage.trim()) {
       onSendMessage(newMessage);
       setNewMessage('');
@@ -45,8 +34,7 @@ const GroupWindow: React.FC<GroupWindowProps> = ({ group, messages, onSendMessag
 
   const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      event.preventDefault();
-      handleSendMessage();
+      handleSend();
     }
   };
 
@@ -62,21 +50,6 @@ const GroupWindow: React.FC<GroupWindowProps> = ({ group, messages, onSendMessag
   };
 
   return (
-<<<<<<< HEAD
-    <Box>
-      <Typography variant="h4">{chat.name}</Typography>
-      <Box>
-        {messages.map((message, index) => (
-          <div key={index} className={`message ${message.isSent ? 'sent' : 'received'}`}>
-            {message.text}
-          </div>
-        ))}
-      </Box>
-      <Box>
-        <TextField
-          variant="outlined"
-          fullWidth
-=======
     <div className='group-window'>
       <div className='group-header'>
         <h4 className='group-title'>{group.name}</h4>
@@ -126,18 +99,18 @@ const GroupWindow: React.FC<GroupWindowProps> = ({ group, messages, onSendMessag
         {/* Message Input */}
         <input
           type='text'
->>>>>>> 31a9229048652a77f72a658c7d19986638454a94
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
           onKeyPress={handleKeyPress}
-          placeholder="Type your message..."
+          placeholder='Type a message...'
+          className='input-field'
         />
-        <Button onClick={handleSendMessage} variant="contained" color="primary">
+        <button onClick={handleSend} className='send-button'>
           Send
-        </Button>
-      </Box>
-    </Box>
+        </button>
+      </div>
+    </div>
   );
 };
 
-export default ChatWindow;
+export default GroupWindow;
