@@ -30,8 +30,8 @@ const Login: React.FC = () => {
 
   const validateForm = () => {
     const newErrors: FormErrors = {};
-    if (!formData.email) newErrors.email = 'Email is required';
-    if (!formData.password) newErrors.password = 'Password is required';
+    if (!formData.email) newErrors.email = 'email is required';
+    if (!formData.password) newErrors.password = 'password is required';
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -68,7 +68,7 @@ const Login: React.FC = () => {
                 <TextField
                   fullWidth
                   margin='normal'
-                  label='Email'
+                  label='email'
                   id='email'
                   type='email'
                   value={formData.email}
@@ -80,7 +80,7 @@ const Login: React.FC = () => {
                 <TextField
                   fullWidth
                   margin='normal'
-                  label='Password'
+                  label='password'
                   id='password'
                   type='password'
                   value={formData.password}

@@ -20,8 +20,8 @@ import '../styles/Register.css';
 import registerImage from '../assets/images/reg.png';
 
 interface FormData {
-  firstName: string;
-  lastName: string;
+  firstname: string;
+  lastname: string;
   email: string;
   password: string;
   gender: string;
@@ -29,8 +29,8 @@ interface FormData {
 }
 
 interface FormErrors {
-  firstName?: string;
-  lastName?: string;
+  firstname?: string;
+  lastname?: string;
   email?: string;
   password?: string;
   gender?: string;
@@ -41,8 +41,8 @@ const Register: React.FC = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState<FormData>({
-    firstName: '',
-    lastName: '',
+    firstname: '',
+    lastname: '',
     email: '',
     password: '',
     gender: '',
@@ -62,12 +62,12 @@ const Register: React.FC = () => {
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
-    if (!formData.firstName) newErrors.firstName = 'First name is required';
-    if (!formData.lastName) newErrors.lastName = 'Last name is required';
-    if (!formData.email) newErrors.email = 'Email is required';
-    if (!formData.password) newErrors.password = 'Password is required';
-    if (!formData.gender) newErrors.gender = 'Gender is required';
-    if (!formData.role) newErrors.role = 'Role is required';
+    if (!formData.firstname) newErrors.firstname = 'First name is required';
+    if (!formData.lastname) newErrors.lastname = 'Last name is required';
+    if (!formData.email) newErrors.email = 'email is required';
+    if (!formData.password) newErrors.password = 'password is required';
+    if (!formData.gender) newErrors.gender = 'gender is required';
+    if (!formData.role) newErrors.role = 'role is required';
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -108,11 +108,11 @@ const Register: React.FC = () => {
                       fullWidth
                       margin="normal"
                       label="First name"
-                      id="firstName"
-                      value={formData.firstName}
+                      id="firstname"
+                      value={formData.firstname}
                       onChange={handleTextFieldChange}
-                      error={!!errors.firstName}
-                      helperText={errors.firstName}
+                      error={!!errors.firstname}
+                      helperText={errors.firstname}
                       variant="outlined"
                     />
                   </Grid>
@@ -122,11 +122,11 @@ const Register: React.FC = () => {
                       fullWidth
                       margin="normal"
                       label="Last name"
-                      id="lastName"
-                      value={formData.lastName}
+                      id="lastname"
+                      value={formData.lastname}
                       onChange={handleTextFieldChange}
-                      error={!!errors.lastName}
-                      helperText={errors.lastName}
+                      error={!!errors.lastname}
+                      helperText={errors.lastname}
                       variant="outlined"
                     />
                   </Grid>
@@ -137,7 +137,7 @@ const Register: React.FC = () => {
                     <TextField
                       fullWidth
                       margin="normal"
-                      label="Email"
+                      label="email"
                       id="email"
                       type="email"
                       value={formData.email}
@@ -152,7 +152,7 @@ const Register: React.FC = () => {
                     <TextField
                       fullWidth
                       margin="normal"
-                      label="Password"
+                      label="password"
                       id="password"
                       type="password"
                       value={formData.password}
@@ -167,13 +167,13 @@ const Register: React.FC = () => {
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={6}>
                     <FormControl fullWidth margin="normal" error={!!errors.gender}>
-                      <InputLabel id="gender-label">Gender</InputLabel>
+                      <InputLabel id="gender-label">gender</InputLabel>
                       <Select
                         labelId="gender-label"
                         id="gender"
                         name="gender"
                         value={formData.gender}
-                        label="Gender"
+                        label="gender"
                         onChange={handleSelectChange}
                       >
                         <MenuItem value="">
@@ -189,17 +189,17 @@ const Register: React.FC = () => {
 
                   <Grid item xs={12} sm={6}>
                     <FormControl fullWidth margin="normal" error={!!errors.role}>
-                      <InputLabel id="role-label">Role</InputLabel>
+                      <InputLabel id="role-label">role</InputLabel>
                       <Select
                         labelId="role-label"
                         id="role"
                         name="role"
                         value={formData.role}
-                        label="Role"
+                        label="role"
                         onChange={handleSelectChange}
                       >
                         <MenuItem value="">
-                          <em>Select Role</em>
+                          <em>Select role</em>
                         </MenuItem>
                         <MenuItem value="admin">Admin</MenuItem>
                         <MenuItem value="employee">Employee</MenuItem>
