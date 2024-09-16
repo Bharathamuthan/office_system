@@ -2,30 +2,30 @@ const Joi = require('joi');
 
 // Registration validation schema
 const UserSchema = Joi.object({
-  FirstName: Joi.string()
+  firstname: Joi.string()
     .min(2)
     .max(50)
     .required(),
 
-  LastName: Joi.string()
+  lastname: Joi.string()
     .min(2)
     .max(50)
     .required(),
 
-  Email: Joi.string()
+  email: Joi.string()
     .email()  
     .required(),
 
-  Password: Joi.string()
+  password: Joi.string()
     .min(8)  // Minimum length for security
     //.pattern(/(?=.*[A-Z])(?=.*\d)/)  // At least one uppercase letter and one number
     .required(),
 
-  Gender: Joi.string()
+  gender: Joi.string()
     .valid('male', 'female', 'other')  
     .required(),
     
-   Role: Joi.string()
+   role: Joi.string()
     .valid('Admin', 'employee', 'customer')
     .required()
    
@@ -33,11 +33,11 @@ const UserSchema = Joi.object({
 
 // Login validation schema
 const loginSchema = Joi.object({
-  Email: Joi.string()
+  email: Joi.string()
     .email()  
     .required(),
 
-  Password: Joi.string()
+  password: Joi.string()
     .min(8)  // Minimum length for security
     .required(),
 });

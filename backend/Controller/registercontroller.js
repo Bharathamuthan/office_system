@@ -11,29 +11,29 @@ const createUser = async (req, res) => {
     const { error } = UserSchema.validate(req.body);
     if (error) return res.status(400).json({ message: error.details[0].message });
 
-    const { FirstName, LastName, Gender, Email, Password, Role } = req.body;
+    const { firstname, lastname, gender, email, password, role } = req.body;
 
-    if (!FirstName || !LastName || !Gender || !Email || !Password || !Role) {
+    if (!firstname || !lastname || !gender || !email || !password || !role) {
         return res.status(400).json({ message: 'All fields are required' });
     }
 
     try {
-        let user = await User.findOne({ Email });
+        let user = await User.findOne({ email });
         if (user) {
             return res.status(400).json({ message: 'User already exists' });
         }
 
         user = new User({
-            FirstName,
-            LastName,
-            Gender,
-            Email,
-            Password,
-            Role
+            firstname,
+            lastname,
+            gender,
+            email,
+            password,
+            role
         });
 
         const salt = await bcrypt.genSalt(10);
-        user.Password = await bcrypt.hash(Password, salt);
+        user.password = await bcrypt.hash(password, salt);
 
         await user.save();
         res.status(201).json({ message: 'Registerd succesfully' });
@@ -130,17 +130,17 @@ const loginUser = async (req, res) => {
     const { error } = loginSchema.validate(req.body);
     if (error) return res.status(400).json({ message: error.details[0].message });
 
-    const { Email, Password } = req.body;
+    const { email, password } = req.body;
 
     try {
         // Find user by email
-        const user = await User.findOne({ Email });
+        const user = await User.findOne({ email });
         if (!user) {
             return res.status(400).json({ message: 'Invalid email or password' });
         }
 
         // Compare provided password with the hashed password in the database
-        const isMatch = await bcrypt.compare(Password, user.Password);
+        const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
             return res.status(400).json({ message: 'Invalid email or password' });
         }
@@ -149,7 +149,7 @@ const loginUser = async (req, res) => {
         const payload = {
             user: {
                 id: user.id,
-                role: user.Role // Include role or any other user info if needed
+                role: user.role // Include role or any other user info if needed
             }
         };
 

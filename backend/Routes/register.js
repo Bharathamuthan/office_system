@@ -5,7 +5,7 @@ const registercontroller = require('../Controller/registercontroller')
 const router = express.Router();
 
 // Route to create a new employee
-router.post('/register', registercontroller.createUser);
+router.post('/user', registercontroller.createUser);
 
 // Route to get all employees
 router.get('/', registercontroller.getAllUsers);
