@@ -178,4 +178,3 @@ module.exports = {
     deleteUser,
     loginUser
 };
-
