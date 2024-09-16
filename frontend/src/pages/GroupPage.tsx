@@ -70,7 +70,7 @@ const GroupPage: React.FC = () => {
                   group={selectedGroup} 
                   messages={messages} 
                   onSendMessage={handleSendMessage} 
-                  onClose={handleCloseGroupWindow} // Pass the onClose prop
+                  onClose={handleCloseGroupWindow} 
                 />
               </>
             ) : (
