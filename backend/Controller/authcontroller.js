@@ -123,56 +123,46 @@ const deleteUser = async (req, res) => {
         });
     }
 };
-
-// // Login user
 const loginUser = async (req, res) => {
-    // Validate user input
-    const { error } = loginSchema.validate(req.body);
-    if (error) return res.status(400).json({ message: error.details[0].message });
-
     const { email, password } = req.body;
-
-    try {
-        // Find user by email
-        const user = await User.findOne({ email });
-        if (!user) {
-            return res.status(400).json({ message: 'Invalid email or password' });
-        }
-
-        // Compare provided password with the hashed password in the database
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) {
-            return res.status(400).json({ message: 'Invalid email or password' });
-        }
-
-        // Create JWT payload
-        const payload = {
-            user: {
-                id: user.id,
-                role: user.role // Include role or any other user info if needed
-            }
-        };
-
-        const jwtSecret = process.env.JWT_SECRET;
-
-        if (!jwtSecret) {
-          return res.status(500).json({ error: 'JWT secret is not defined' });
-        }
-      
-        // Sign the token
-        const token = jwt.sign(
-            payload,
-            config.get('jwtSecret'),  // Ensure you have 'jwtSecret' in your config file
-            { expiresIn: '3h' }  // Token expiration time
-        );
-
-        // Respond with the token
-        res.status(200).json({ token });
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server error');
+  
+    // Validate request body using Joi
+    const { error } = loginSchema.validate(req.body);
+    if (error) {
+      return res.status(400).json({ msg: error.details[0].message });
     }
-};
+  
+    try {
+      let user = await User.findOne({ email });
+      if (!user) {
+        return res.status(400).json({ msg: 'Invalid credentials' });
+      }
+  
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (!isMatch) {
+        return res.status(400).json({ msg: 'Invalid credentials' });
+      }
+  
+      const payload = {
+        user: {
+          id: user.id,
+        },
+      };
+  
+      jwt.sign(
+        payload,
+        process.env.JWT_SECRET,
+        { expiresIn: '1h' },
+        (err, token) => {
+          if (err) throw err;
+          res.json({ token });
+        }
+      );
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server error');
+    }
+  };
 
 
 

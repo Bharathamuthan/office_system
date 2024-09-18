@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const config = require('config');
+require('dotenv').config;
 
 const authMiddleware = (req, res, next) => {
     const token = req.header('x-auth-token');
