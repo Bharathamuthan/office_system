@@ -1,11 +1,11 @@
 const express = require('express');
  
-const registercontroller = require('../Controller/registercontroller')
+const registercontroller = require('../Controller/authcontroller')
 //const authendicate = require('../middleware/authendicate');
 const router = express.Router();
 
 // Route to create a new employee
-router.post('/user', registercontroller.createUser);
+router.post('/register', registercontroller.createUser);
 
 // Route to get all employees
 router.get('/', registercontroller.getAllUsers);

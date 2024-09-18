@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config();   
-const registerRoutes = require('../backend/Routes/register');
+const registerRoutes = require('./Routes/auth');
 const leaveRoutes = require('../backend/Routes/leave');
 const taskRoutes = require('../backend/Routes/task');
 const authMiddleware = require('../backend/middleware/authendicate')
@@ -15,7 +15,7 @@ mongoose.connect(process.env.MONGO_URI, )
   .catch(err => console.error('Failed to connect to MongoDB', err));
 
 // Use Routes
-app.use('/register',registerRoutes)
+app.use('/officesystem',registerRoutes)
 app.use('/leave',  leaveRoutes);
 app.use('/task',  taskRoutes); 
 

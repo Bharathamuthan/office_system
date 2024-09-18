@@ -1,0 +1,61 @@
+.container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    height: 70%;
+    width: 100%;
+}
+
+.container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.container form h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.container form div {
+    margin-bottom: 15px;
+}
+
+.container form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.container form input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Specific styles for the reason input */
+.container form input[name="reason"] {
+    height: 70px;
+    width: 600px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.container form button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.container form button:hover {
+    background-color: #0056b3;
+}

@@ -1,17 +1,21 @@
 body {
-    overflow: hidden;
-  }
-  
-  .image{
-    object-fit: cover; 
-      
-  }
+  /* overflow: hidden; */
+  background-color: beige;
+}
+
+.image {
+  max-width: 100%; 
+  height: auto; 
+  display: block; 
+  margin: auto; 
+}
+
 .cascading-right {
-    margin-right: -50px !important;
+  margin-right: -50px !important;
+}
+
+@media (max-width: 900px) {
+  .cascading-right {
+    margin-right: 0 !important;
   }
-  
-  @media (max-width: 900px) {
-    .cascading-right {
-      margin-right: 0  !important;
-    }
-  }
+}

@@ -1,21 +1,25 @@
-import React, { useState } from 'react';
-import { MDBInput, MDBBtn } from 'mdb-react-ui-kit';
+import React, { useState, ChangeEvent, KeyboardEvent } from 'react';
+import { MDBBtn } from 'mdb-react-ui-kit';
 
-const MessageInput = ({ onSendMessage }) => {
-  const [message, setMessage] = useState('');
+interface MessageInputProps {
+  onSendMessage: (message: string) => void;
+}
 
-  const handleInputChange = (e) => {
+const MessageInput: React.FC<MessageInputProps> = ({ onSendMessage }) => {
+  const [message, setMessage] = useState<string>('');
+
+  const handleInputChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(e.target.value);
   };
 
   const handleSend = () => {
     if (message.trim()) {
       onSendMessage(message);
-      setMessage(''); // Clear the input after sending the message
+      setMessage('');
     }
   };
 
-  const handleKeyPress = (e) => {
+  const handleKeyPress = (e: KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleSend();
@@ -24,10 +28,9 @@ const MessageInput = ({ onSendMessage }) => {
 
   return (
     <div className='d-flex mt-3'>
-      <MDBInput
-        type='textarea'
-        rows='1'
-        className='flex-grow-1'
+      <textarea
+        rows={1}
+        className='form-control flex-grow-1'
         value={message}
         onChange={handleInputChange}
         onKeyPress={handleKeyPress}

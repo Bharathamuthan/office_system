@@ -1,6 +1,6 @@
-const Task = require('../Model/taskmodel');
-//const taskSchema = require('../Validation/taskvalidation'); // Adjust path as necessary
-
+const Task = require('../Model/');
+const taskSchema = require('../Validation/taskvalidation');// Adjust path as necessary
+ 
 const createTask = async (req, res) => {
   try {
     // Validate request body using Joi

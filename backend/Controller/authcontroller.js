@@ -1,9 +1,9 @@
-const User = require('../Model/registermodel');
+const User = require('../Model/authmodel');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 require('dotenv').config();
-const { UserSchema, loginSchema } = require('../Validation/registervalidation');
+const { UserSchema, loginSchema } = require('../Validation/authvalidation');
 
 // Create a new user
 const createUser = async (req, res) => {

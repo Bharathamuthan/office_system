@@ -1,13 +1,15 @@
 .body {
-    overflow: hidden;
-  }
-  
+  /* overflow: hidden; */
+  background-color: beige;
+}
+
 .cascading-right {
-    margin-right: -50px !important;
-  }
-  
-  @media (max-width: 900px) {
-    .cascading-right {
-      margin-right: 0  !important;
-    }
-  }
+  margin-right: -50px !important;
+}
+
+.login-image {
+  max-width: 100%;
+  height: auto; 
+  display: block; 
+  margin: auto;
+}

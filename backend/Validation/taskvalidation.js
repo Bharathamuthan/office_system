@@ -1,4 +1,4 @@
-const joi = require ('joi');
+const Joi = require('joi'); // Import Joi
 
 // Define the Joi schema for task validation
 const taskSchema = Joi.object({

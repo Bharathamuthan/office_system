@@ -1,0 +1,113 @@
+.group-window {
+    display: flex;
+    flex-direction: column;
+    height: 88%;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  .group-header {
+    display: flex;
+    padding: 15px;
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .group-title {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 600;
+  }
+  
+  .message-list {
+    flex: 1;
+    padding: 10px;
+    background-color: #f4f4f4;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .message {
+    max-width: 70%;
+    padding: 10px 15px;
+    border-radius: 20px;
+    word-break: break-word;
+    align-self: flex-start;
+  }
+  
+  .sent-message {
+    background-color: #007bff;
+    color: #fff;
+    align-self: flex-end;
+  }
+  
+  .received-message {
+    background-color: #e9ecef;
+    color: #000;
+    align-self: flex-start;
+  }
+  
+  .input-area {
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+  }
+  
+  .input-field {
+    flex: 1;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    margin-right: 10px;
+  }
+  
+  .send-button {
+    padding: 10px 15px;
+    border-radius: 20px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .messageContainer {
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 300px; 
+  }
+
+  .close-button{
+    margin-left: 420px;
+  }
+  
+  .file-sharing {
+    margin-bottom: 10px;
+  }
+  
+  .file-upload-icon {
+    background-color: transparent;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  .file-upload-input {
+    display: none;
+  }
+  
+  .input-field {
+    margin-left: 10px;
+  }
+  
+  .send-button {
+    margin-left: 10px;
+  }
+  
+  
