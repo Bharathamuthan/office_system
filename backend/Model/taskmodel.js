@@ -11,7 +11,7 @@ const taskSchema = new mongoose.Schema({
     required: true, // Ensures that title is provided
     trim: true // Removes leading and trailing whitespace
   },
-  description: { 
+  description: {  
     type: String,
     trim: true // Removes leading and trailing whitespace
   },
