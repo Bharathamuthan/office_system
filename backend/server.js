@@ -15,7 +15,7 @@ mongoose.connect(process.env.MONGO_URI, )
   .catch(err => console.error('Failed to connect to MongoDB', err));
 
 // Use Routes
-app.use('/register',registerRoutes)
+app.use('/officesystem',registerRoutes)
 app.use('/leave',  leaveRoutes);
 app.use('/task',  taskRoutes); 
 
