@@ -1,24 +1,22 @@
 const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config();   
-const jwt = require('jsonwebtoken');
-const authRoutes = require('./Routes/auth');
+const registerRoutes = require('./Routes/auth');
 const leaveRoutes = require('../backend/Routes/leave');
 const taskRoutes = require('../backend/Routes/task');
-const authMiddleware = require('../backend/middleware/authendicate');
-const bodyParser = require('body-parser');
-
+const authMiddleware = require('../backend/middleware/authendicate')
+const cors = require('cors')
 const app = express();
+
 app.use(express.json()); // To parse JSON bodies
-app.use(bodyParser.json());
+app.use(cors());
 // Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI, ) 
+mongoose.connect(process.env.MONGO_URI, )
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.error('Failed to connect to MongoDB', err));
 
 // Use Routes
-
-app.use('/officesystem',authRoutes);
+app.use('/officesystem',registerRoutes)
 app.use('/leave',  leaveRoutes);
 app.use('/task',  taskRoutes); 
 
