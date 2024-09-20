@@ -11,7 +11,6 @@ const UserSchema = new mongoose.Schema({
     lastname: {
         type: String,
         required: true,
-        minlength: 2,
         maxlength: 50  
     },
 
@@ -19,7 +18,7 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-        match: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/ 
+       
     },
 
     password: {
@@ -36,9 +35,10 @@ const UserSchema = new mongoose.Schema({
     role: {
        type: String,  
        required: true,
-       enum: ['Admin','employee','customer']
+       enum: ['admin','employee','training']
      }
-});
+   
+},  { timestamps: true });
 
 const User = mongoose.model('User', UserSchema);
 
