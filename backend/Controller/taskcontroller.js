@@ -16,25 +16,6 @@ const createTask = async (req, res) => {
   }
 };
 
-// const updateTask = async (req, res) => { 
-//   try {
-//     // Validate request body using Joi
-//     const { error, value } = taskSchema.validate(req.body);
-//     // console.log('Validation Error:', error.details[0].message);
-//     if (error) return res.status(400).send(error.details[0].message);
-
-//     // console.log('Task ID:', req.params.id);
-//     // console.log('Validated Data:', value);
-
-//     // Update task using validated data
-//     const task = await Task.findByIdAndUpdate(req.params.id, value, { new: true });
-//     // console.log('Task not found for ID:', req.params.id);
-//     if (!task) return res.status(404).send('Task not found');
-//     res.json(task);
-//   } catch (err) {
-//     res.status(400).send(err.message);
-//   }
-// };
 const updateTask = async (req, res) => {
   try {
     const { error, value } = taskSchema.validate(req.body);
