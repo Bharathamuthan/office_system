@@ -1,12 +1,10 @@
-const Joi = require('joi'); // Import Joi
+const Joi = require('joi'); 
 
-// Define the Joi schema for task validation
 const taskSchema = Joi.object({
-  adminId: Joi.string().length(24).hex().required(), // ObjectId validation
   title: Joi.string().trim().required(),
-  description: Joi.string().trim().optional(),
-  assignedTo: Joi.string().length(24).hex().optional(), // ObjectId validation
-  status: Joi.string().valid('not started', 'in progress', 'completed').default('not started')
+  description: Joi.string().trim().allow(null, ''), // Allow empty or null description
+  assignedTo: Joi.string().optional(), // Optional field for assigned user
+  status: Joi.string().valid('not started', 'in progress', 'completed').optional(),
 });
 
 module.exports = taskSchema;
