@@ -1,7 +1,30 @@
 const Joi = require('joi');
 
+<<<<<<< HEAD
 
 const emailpattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+=======
+const UserSchema = new mongoose.Schema({
+    firstname: {
+        type: String,
+        required: true,
+        minlength: 2,
+        maxlength: 50  
+    },
+     
+    lastname: {
+        type: String,
+        required: true,
+        maxlength: 50  
+    },
+
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+       
+    },
+>>>>>>> 0604e08e799d819e0501db4d2c441397a1f920ef
 
 
 // Registration validation schema
@@ -24,6 +47,7 @@ const UserSchema = Joi.object({
       'any.required': 'Last name is required',
     }),
 
+<<<<<<< HEAD
   email: Joi.string() 
     .pattern(emailpattern)
     .required()
@@ -57,6 +81,15 @@ const UserSchema = Joi.object({
   })
    
 });
+=======
+    role: {
+       type: String,  
+       required: true,
+       enum: ['admin','employee','training']
+     }
+   
+},  { timestamps: true });
+>>>>>>> 0604e08e799d819e0501db4d2c441397a1f920ef
 
 // Login validation schema
 const loginSchema = Joi.object({
