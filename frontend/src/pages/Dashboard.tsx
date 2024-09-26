@@ -1,48 +1,28 @@
 import React from 'react';
-import { Container, Grid, Button, Box, Divider, Typography } from '@mui/material';
-import { useNavigate, Outlet } from 'react-router-dom';
+import { Container, Grid, Box } from '@mui/material';
+import { Outlet } from 'react-router-dom';
+import SideMenu from '../components/SideMenu';
+import Header from '../components/Header';
 import '../styles/Dashboard.css';
 
 const Dashboard: React.FC = () => {
-  const navigate = useNavigate();
-
-  const handleAdminClick = () => {
-    navigate('admin'); 
-  };
-
-  const handleGroupsClick = () => {
-    navigate('groups');
-  };
-
-  const handleLeaveRequestClick = () => {
-    navigate('leave-request'); 
-  };
-
   return (
-    <Container maxWidth={false} sx={{ mt: 5, height: '50vh' }}>
+    <Container maxWidth={false} sx={{ height: '100vh', padding: 0 }}>
+      {/* Header */}
+      <Box className="header">
+        <Header />
+      </Box>
+
       <Grid container>
         {/* Sidebar */}
-        <Grid item md={3} sx={{ backgroundColor: 'lightgray', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-          <Box className='sidebar' p={2} sx={{ flex: 1 }}>
-            <Typography variant="h5" fontWeight="bold">PCS</Typography>
-            <Divider sx={{ my: 2 }} />
-            <Button variant='contained' color='primary' fullWidth onClick={handleAdminClick}>
-              Admin
-            </Button>
-            <Divider sx={{ my: 2 }} />
-            <Button variant='contained' color='primary' fullWidth onClick={handleGroupsClick}>
-              Groups
-            </Button>
-            <Divider sx={{ my: 2 }} />
-            <Button variant='contained' color='primary' fullWidth onClick={handleLeaveRequestClick}>
-              Leave Request
-            </Button>
-          </Box>
+        <Grid item md={3} className="side">
+          <SideMenu />
         </Grid>
 
         {/* Main Content */}
-        <Grid item md={9} sx={{ padding: 0 }}>
-          <Box className='main-content' sx={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
+        <Grid item md={9} sx={{ padding: 0, marginTop: '70px' }}>
+          {/* Main Content Area */}
+          <Box className="main-content" sx={{ height: 'calc(100vh - 70px)', display: 'flex', flexDirection: 'column' }}>
             <Outlet />
           </Box>
         </Grid>

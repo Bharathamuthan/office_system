@@ -1,15 +1,92 @@
-.body {
-  /* overflow: hidden; */
-  background-color: beige;
+/* Global styles */
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(45deg, #e6eceb, #d7eab8);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.cascading-right {
-  margin-right: -50px !important;
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+/* Card styles */
+.MuiCard-root {
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+}
+
+.MuiCardContent-root {
+  text-align: center;
+}
+
+/* Typography styles */
+.MuiTypography-h4 {
+  color: #333;
+  font-weight: 600;
+}
+
+.MuiTypography-body2 {
+  font-size: 14px;
+  color: #777;
+}
+
+/* Form styles */
+.MuiTextField-root {
+  margin-bottom: 15px;
+}
+
+.MuiButton-root {
+  background-color: #3f51b5;
+}
+
+.MuiButton-root:hover {
+  background-color: #303f9f;
+}
+
+/* Error message */
+.MuiTypography-colorError {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #f44336;
+}
+
+/* Login image */
 .login-image {
-  max-width: 100%;
-  height: auto; 
-  display: block; 
-  margin: auto;
+  width: 100%;
+  max-width: 400px;
+  display: block;
+  margin: 0 auto;
+  border-radius: 15px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .MuiGrid-item {
+    text-align: center;
+  }
+
+  .MuiCard-root {
+    margin: 10px 0;
+  }
+
+  .MuiGrid-item img {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .MuiCard-root {
+    width: 100%;
+    padding: 20px;
+  }
 }

@@ -1,8 +1,11 @@
+// src/pages/Login.tsx
+
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { Container, Grid, Card, CardContent, TextField, Button, Typography, Link } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import LoginImage from '../assets/images/signin.png';
 import '../styles/Login.css';
+import { loginUser } from '../services/api';
 
 interface FormData {
   email: string;
@@ -12,6 +15,7 @@ interface FormData {
 interface FormErrors {
   email?: string;
   password?: string;
+  form?: string; // Add this line to include form error
 }
 
 const Login: React.FC = () => {
@@ -22,6 +26,7 @@ const Login: React.FC = () => {
     password: '',
   });
   const [errors, setErrors] = useState<FormErrors>({});
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
@@ -30,19 +35,36 @@ const Login: React.FC = () => {
 
   const validateForm = () => {
     const newErrors: FormErrors = {};
-    if (!formData.email) newErrors.email = 'email is required';
-    if (!formData.password) newErrors.password = 'password is required';
+    if (!formData.email) newErrors.email = 'Email is required';
+    if (!formData.password) newErrors.password = 'Password is required';
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault(); // Prevent default form submission behavior
+    
     if (validateForm()) {
-      console.log('Form data:', formData);
-      navigate('/Dashboard');
+      setLoading(true);
+      try {
+        const response = await loginUser(formData);
+        console.log('Login successful:', response);
+        navigate('/Dashboard');
+      } catch (error) {
+        console.error('Login error:', error);
+        setErrors({ ...errors, form: 'Login failed. Please check your credentials.' });
+      } finally {
+        setLoading(false);
+      }
+    } else {
+      // Scroll to the first field with an error
+      const firstErrorField = document.querySelector('.Mui-error');
+      if (firstErrorField) {
+        firstErrorField.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
+  
 
   const redirectToRegister = () => {
     navigate('/Register');
@@ -68,7 +90,7 @@ const Login: React.FC = () => {
                 <TextField
                   fullWidth
                   margin='normal'
-                  label='email'
+                  label='Email'
                   id='email'
                   type='email'
                   value={formData.email}
@@ -80,7 +102,7 @@ const Login: React.FC = () => {
                 <TextField
                   fullWidth
                   margin='normal'
-                  label='password'
+                  label='Password'
                   id='password'
                   type='password'
                   value={formData.password}
@@ -90,14 +112,16 @@ const Login: React.FC = () => {
                   variant='outlined'
                 />
 
-                <Button fullWidth variant='contained' color='primary' type='submit' sx={{ mt: 3, mb: 2 }}>
-                  Submit
+                <Button fullWidth variant='contained' color='primary' type='submit' sx={{ mt: 3, mb: 2 }} disabled={loading}>
+                  {loading ? 'Submitting...' : 'Submit'}
                 </Button>
+
+                {errors.form && <Typography color="error">{errors.form}</Typography>}
 
                 <Typography>
                   Create New Account?{' '}
                   <Link component="button" variant="body2" onClick={redirectToRegister}>
-                    Sign up
+                    Sign_up
                   </Link>
                 </Typography>
               </form>

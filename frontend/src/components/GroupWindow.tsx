@@ -1,23 +1,25 @@
 import React, { useState, KeyboardEvent } from 'react';
-import '../styles/Group.css';
+import '../styles/Group.css'; 
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import Picker from '@emoji-mart/react';  // Update import to default
+import Picker from '@emoji-mart/react';  // Emoji picker
 import data from '@emoji-mart/data';     // Emoji data import
+import { Button, Box } from '@mui/material'; // Material-UI components
 
 interface Message {
   text: string;
   isSent: boolean;
 }
 
-interface Group {
+interface Chat {
+  id: number;
   name: string;
 }
 
 interface GroupWindowProps {
-  group: Group;
+  group: Chat;
   messages: Message[];
   onSendMessage: (message: string) => void;
-  onClose: () => void; 
+  onClose: () => void;
 }
 
 const GroupWindow: React.FC<GroupWindowProps> = ({ group, messages, onSendMessage, onClose }) => {
@@ -25,7 +27,7 @@ const GroupWindow: React.FC<GroupWindowProps> = ({ group, messages, onSendMessag
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [showEmojiPicker, setShowEmojiPicker] = useState<boolean>(false);
 
-  const handleSend = () => {
+  const handleSendMessage = () => {
     if (newMessage.trim()) {
       onSendMessage(newMessage);
       setNewMessage('');
@@ -34,7 +36,8 @@ const GroupWindow: React.FC<GroupWindowProps> = ({ group, messages, onSendMessag
 
   const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      handleSend();
+      event.preventDefault();
+      handleSendMessage();
     }
   };
 
@@ -45,7 +48,7 @@ const GroupWindow: React.FC<GroupWindowProps> = ({ group, messages, onSendMessag
     }
   };
 
-  const addEmoji = (emoji: any) => {
+  const addEmoji = (emoji: { native: string }) => {
     setNewMessage(newMessage + emoji.native);
   };
 
@@ -70,7 +73,6 @@ const GroupWindow: React.FC<GroupWindowProps> = ({ group, messages, onSendMessag
       </div>
 
       <div className='input-area'>
-        {/* File Sharing Option */}
         <div className='file-sharing'>
           <label htmlFor='file-upload' className='file-upload-label'>
             <i className='fas fa-upload'></i>
@@ -83,31 +85,29 @@ const GroupWindow: React.FC<GroupWindowProps> = ({ group, messages, onSendMessag
             />
           </label>
 
-          {/* Emoji Picker Button */}
           <span className='emoji-icon' onClick={() => setShowEmojiPicker(!showEmojiPicker)}>
             😀
           </span>
 
-          {/* Emoji Picker */}
           {showEmojiPicker && (
             <div className='emoji-picker'>
-              <Picker data={data} onEmojiSelect={addEmoji} /> {/* Updated to onEmojiSelect */}
+              <Picker data={data} onEmojiSelect={addEmoji} />
             </div>
           )}
         </div>
 
-        {/* Message Input */}
-        <input
-          type='text'
-          value={newMessage}
-          onChange={(e) => setNewMessage(e.target.value)}
-          onKeyPress={handleKeyPress}
-          placeholder='Type a message...'
-          className='input-field'
-        />
-        <button onClick={handleSend} className='send-button'>
-          Send
-        </button>
+        <Box>
+          <input
+            type='text'
+            value={newMessage}
+            onChange={(e) => setNewMessage(e.target.value)}
+            onKeyPress={handleKeyPress}
+            placeholder="Type your message..."
+          />
+          <Button onClick={handleSendMessage} variant="contained" color="primary">
+            Send
+          </Button>
+        </Box>
       </div>
     </div>
   );

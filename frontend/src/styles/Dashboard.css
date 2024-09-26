@@ -1,12 +1,31 @@
-/* Sidebar Styles */
-.sidebar {
-    background-color: #f4f4f4;
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    height: 100vh;  
-    /* overflow-y: auto;  */
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  }
-  
+/* Sidebar styling */
+.side {
+  margin-top: 75px;
+  background-color: #f4f4f4;
+  min-height: 100vh; /* Ensure the sidebar fills the full height of the page */
+  width: 250px; /* Set the width of the sidebar */
+  position: fixed; /* Make the sidebar fixed to the left */
+  top: 0;
+  left: 0;
+}
+
+/* Main content styling */
+.main-content {
+  padding: 20px;
+  margin-left: 250px; /* This should match the width of the sidebar */
+  margin-top: 70px; /* Ensure the content is below the header */
+}
+
+/* Header styling */
+.header {
+  background-color: white;
+  padding: 0px 0px;
+  width: calc(100% - 0px); /* Subtract the sidebar width from the full width */
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  align-items: center;
+  height: 70px; /* Adjust the header height */
+}
