@@ -28,8 +28,6 @@ const GroupPage: React.FC = () => {
   const handleSelectGroup = (groupId: number) => {
     const group = groups.find(group => group.id === groupId);
     setSelectedGroup(group || null);
-
-    // Sample messages for the selected group
     setMessages([
       { text: 'Welcome to the group!', isSent: false },
       { text: 'Thank you!', isSent: true },
@@ -40,7 +38,6 @@ const GroupPage: React.FC = () => {
     setMessages([...messages, { text, isSent: true }]);
   };
 
-  // Handle close button click in GroupWindow
   const handleCloseGroupWindow = () => {
     setSelectedGroup(null); 
   };
@@ -48,7 +45,6 @@ const GroupPage: React.FC = () => {
   return (
     <Container className='mt-5'>
       <Grid container spacing={2}>
-        {/* Group List Sidebar */}
         <Grid item xs={12} md={3}>
           <Paper elevation={3} style={{ height: '100vh', overflowY: 'auto', padding: '16px' }}>
             <Typography variant="h6">Groups</Typography>
@@ -57,26 +53,22 @@ const GroupPage: React.FC = () => {
               selectedGroupId={selectedGroup?.id || null} 
               onSelectGroup={handleSelectGroup}
             />
-          
           </Paper>
         </Grid>
 
-        {/* Group Content */}
         <Grid item xs={12} md={9}>
           <Paper elevation={3} style={{ height: '100vh', display: 'flex', flexDirection: 'column', padding: '16px' }}>
             {selectedGroup ? (
-              <>
-                <GroupWindow 
-                  group={selectedGroup} 
-                  messages={messages} 
-                  onSendMessage={handleSendMessage} 
-                  onClose={handleCloseGroupWindow} 
-                />
-              </>
+              <GroupWindow 
+                group={selectedGroup} 
+                messages={messages} 
+                onSendMessage={handleSendMessage} 
+                onClose={handleCloseGroupWindow} 
+              />
             ) : (
               <div
                 className='d-flex justify-content-center align-items-center'
-                style={{ height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '300px' }}
+                style={{ height: '100%', marginBottom: '300px' }}
               >
                 <Typography variant="h4" align="center">Please select a group</Typography>
               </div>
