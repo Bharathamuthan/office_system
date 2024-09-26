@@ -1,5 +1,5 @@
 const LeaveRequest = require('../Model/leavemodel');
-//const { leaveRequestSchema, requestIdSchema } = require('../validation');
+const { leaveRequestSchema, requestIdSchema } = require('../Validation/leavevalidation');
 
 const requestLeave = async (req, res) => {
   try {
@@ -7,21 +7,21 @@ const requestLeave = async (req, res) => {
     const { error } = leaveRequestSchema.validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
-    const { reason, date, description } = req.body;
+    const { reason, date, description } = req.body; 
     const leaveRequest = new LeaveRequest({
       userId: req.user.userId,
       reason,
       date,
       description
-    });
+    });   
     await leaveRequest.save(); 
-    res.status(201).send('Leave request sent');
+    res.status(201).send('Leave request sent');   
   } catch (err) {
-    res.status(400).send(err.message);
+    res.status(500).send('Internal server error');
   }
 };
 
-const getRequests = async (req, res) => {
+const getRequests = async (req, res) => { 
   try {
     if (req.user.role !== 'admin') return res.status(403).send('Access denied');
     const requests = await LeaveRequest.find().populate('userId', 'name email');

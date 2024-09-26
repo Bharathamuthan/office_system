@@ -4,15 +4,15 @@ const leaveRequestSchema = new mongoose.Schema({
   userId: { 
     type: mongoose.Schema.Types.ObjectId, 
     ref: 'User',
-    required: true // Ensures that userId is provided
+    required: true 
   },
   reason: { 
     type: String,
-    required: true // Ensures that reason is provided
+    required: true 
   },
   date: { 
     type: Date,
-    required: true // Ensures that date is provided
+    required: true 
   },
   description: String,
   status: { 
